@@ -1,11 +1,23 @@
 import React from "react";
+import '../styles/homePage.scss';
+import  { getUser }   from '../api/users';
 
-
+import  User from "../models/user";
 const Home = () => {
-    let aaa =" aaa"
-    return(
+    let user: User = new User();
 
-        <h1>{aaa}</h1>
+    getUser(1).then(response => {
+        console.log(response.data);
+        user = response.data}); 
+
+    return ( 
+        <div className="Home">
+            <div className="smaller-column" >
+            </div>
+            <div className="bigger-column">
+
+            </div>
+        </div>
     );
 }
 

@@ -1,3 +1,8 @@
+.App {
+  background-color: #f5f7f9;
+  min-height: 100vh;
+}
+
 @mixin flex-vertical-center {
   display: flex;
   align-items: center;
@@ -5,7 +10,7 @@
 
 nav {
   background-color: white;
-  box-shadow: 1px 5px 33px -4px rgba(181, 181, 181, 0.6);
+  box-shadow: 1px 10px 10px -4px rgba(99, 99, 99, 0.35);
   height: 3rem;
   justify-content: space-between;
   box-sizing: border-box;
