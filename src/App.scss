@@ -1,0 +1,90 @@
+@mixin flex-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  background-color: white;
+  box-shadow: 1px 5px 33px -4px rgba(181, 181, 181, 0.6);
+  height: 3rem;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 15px;
+
+  @include flex-vertical-center;
+
+  .logo-icon-container{
+
+    .image-container {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+  
+    }
+  
+    .icon-container {
+      justify-content: space-around;
+      cursor: pointer;
+  
+      @include flex-vertical-center;
+    }
+    @include flex-vertical-center;
+  } 
+
+  .input-container {
+    height: 100%;
+    width: 50vw;
+    position: relative;
+
+    @include flex-vertical-center;
+
+    .search {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      height: 70%;
+      border: 1px solid #cfcfcf;
+      border-radius: 4px;
+      text-indent: 10px;
+      text-align: center;
+
+
+      &:focus {
+        outline: none !important;
+        border: 3px solid #c1c1c1;
+      }
+    }
+  }
+
+  .icons-container {
+    &>* {
+      margin: 0 5px;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    color: gray;
+
+    div {
+      width: 40px;
+      height: 40px;
+      @include flex-vertical-center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #e7e7e7
+    }
+
+    @include flex-vertical-center;
+  }
+}
