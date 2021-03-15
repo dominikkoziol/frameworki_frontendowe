@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import logo from './assets/logo.png';
+import logo from './assets/images/logo.png';
 import Home from './pages/home';
 import './App.scss';
 import HomeIcon from '@material-ui/icons/Home';
