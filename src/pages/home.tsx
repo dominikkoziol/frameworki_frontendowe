@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getUser } from '../api/users';
+import { getUser, getUserPostsById } from '../api/users';
 import { getPhotoById } from '../api/photos';
-import getPostsWithLimit from '../api/posts';
+import { getPostsWithLimit } from '../api/posts';
 import User from "../models/user";
 import '../styles/homePage.scss';
 import profileImage from '../assets/images/profile_image.png';
@@ -16,24 +16,33 @@ import Post from '../models/post';
 
 
 const Home = () => {
+    const userId: number = 1;
 
-    const [user, setUser] = useState<User>();
+    const [user = new User(), setUser] = useState<User>();
     useEffect(() => {
-        getUser(1).then(response => { setUser(response.data); });
-    }, [user?.id]);
+        getUser(userId).then(response => { setUser(response.data); });
+    }, [user.id]);
 
-    const [photo, setPhoto] = useState<Photo>();
+    const [photo = new Photo(), setPhoto] = useState<Photo>();
     useEffect(() => {
-        getPhotoById(1).then(response => { setPhoto(response.data) });
-    }, [photo?.id]);
+        getPhotoById(userId).then(response => { setPhoto(response.data) });
+    }, [photo.id]);
 
     const [bigPost, setBigPost] = useState<Post>();
+    const [posts = [], setPosts] = useState<Post[]>();
 
     useEffect(() => {
-        getPostsWithLimit(1).then(response => {
+        getUserPostsById(userId, 1).then(response => {
             setBigPost(response.data[0]);
         });
     }, [bigPost?.id]);
+
+
+    useEffect(() => {
+        getUserPostsById(userId, 3).then(response => {
+            setPosts(response.data);
+        });
+    }, [posts.length > 0]);
 
 
     return (
@@ -41,11 +50,11 @@ const Home = () => {
             <div className="smaller-column column" >
                 <div className="card">
                     <div className="image-container">
-                        <img src={photo?.thumbnailUrl} alt="profile-image" />
+                        <img src={photo.thumbnailUrl} alt="profile-image" />
                     </div>
-                    <h2>{user?.name}</h2>
+                    <h2>{user.name}</h2>
                     <div className="job-title">
-                        <span>Job title - {user?.company.name}</span>
+                        <span>Job title - {user.company.name}</span>
                     </div>
                     <hr />
                     <div className="buttons-container">
@@ -82,11 +91,43 @@ const Home = () => {
             </div>
             <div className="bigger-column column">
                 <div className="big-card">
-                    <div className="image-container" style={{ backgroundImage: `url(${photo?.url})`}}>
-                        <h2>{ bigPost?.title }</h2>
+                    <div className="image-container" style={{ backgroundImage: `url(${photo.url})` }}>
+                        <div className="gradient-container">
+                            <h2> {bigPost?.title}</h2>
+                            <div className="author">
+                                <span> 7 jan. 2020</span>
+                                <div className="profile-image">
+                                    <img src={photo.thumbnailUrl} alt="profile_picture" />
+                                </div>
+                                <span>{user.name} </span>
+                            </div>
+                        </div>
                     </div>
                     <div className="publication-container">
                         <h3>Latest Publications</h3>
+                        <div className="">
+
+                            {posts.map(element => {
+                                return (
+                                    <div className="post-container">
+                                        <div className="small-image-container">
+                                            <img src={photo.thumbnailUrl} />
+                                        </div>
+                                        <div className="info-container">
+                                            <h4>{element.title}</h4>
+                                            <div  className="author">
+                                                <span> 7 jan. 2020</span>
+                                                <div className="profile-image">
+                                                    <img src={photo.thumbnailUrl} alt="profile_picture" />
+                                                </div>
+                                                <span>{user.name} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                            <span className="see-more">See more publications</span>
+                        </div>
                     </div>
                 </div>
             </div>

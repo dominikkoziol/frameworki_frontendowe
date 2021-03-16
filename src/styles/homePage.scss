@@ -23,7 +23,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-    
+
             padding: 26px 0;
             box-shadow: 1px 10px 10px -4px rgba(99, 99, 99, 0.15);
             box-sizing: border-box;
@@ -125,8 +125,32 @@
         .big-card {
             display: flex;
             justify-content: center;
-            width:100%;
+            width: 100%;
             min-height: 400px;
+
+            .gradient-container {
+                //background: #7b7bff;
+                height: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                background: linear-gradient(0deg, rgba(#8686cf, 0.5) 0%, rgba(#c4c4ff, 0) 100%);
+                > div {
+                    margin-bottom: 30px;
+                }
+                >* {
+                    width: 90%;
+                    box-sizing: border-box;
+                    padding-right: 10px;
+                }
+
+                h2 {
+                    font-weight: 500;
+                    font-size: 20px;
+                }
+            }
+
             .image-container {
                 width: 35%;
                 height: 100%;
@@ -138,16 +162,76 @@
                 background-size: contain;
 
                 color: white;
-               h2 {
-                font-weight: 500;
-                font-size: 20px;
-               }
+
             }
         }
 
         .publication-container {
             width: 65%;
             background: white;
+
+            box-sizing: border-box;
+            padding: 0 20px;
+
+            .post-container {
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+                margin-bottom: 15px;
+
+                .small-image-container {
+                    width: 100px;
+                    height: 100px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .info-container {
+                    width: calc(100% - 100px);
+                    margin-left: 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                  
+
+
+                }
+
+            }
+
+            .see-more {
+                display: block;
+                color: #6464e6;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                cursor: pointer
+            }
+
+
         }
+        .author {
+            display: flex;
+            align-items: center;
+
+            >* {
+                margin: 0 4px;
+            }
+
+            .profile-image {
+                width: 30px;
+                height: 30px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+        }
+
     }
 }
