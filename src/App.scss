@@ -121,3 +121,11 @@ nav {
     @include flex-vertical-center;
   }
 }
+
+
+
+.main-app-content {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}

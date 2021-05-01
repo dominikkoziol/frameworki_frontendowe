@@ -1,23 +1,42 @@
+import { Icon } from '@material-ui/core';
 import React from 'react';
 import { FC } from 'react';
 import Workspace from '../../models/workspace';
-import "../../styles/workspace.scss";
+import "./workspace.scss";
 
 interface IWorkspaceComponentProps {
     workspace: Workspace;
 }
 
 
-// style={{backgroundImage: `url(../assets/images/${workspace.backgroundImage})
+//
 const WorkspaceComponent: FC<IWorkspaceComponentProps> = ({ workspace }) => {
     return (
         <div className="workspace-component">
-            <div className="background">
-
+            <div className="background"  style={{backgroundImage: `url(${workspace.backgroundImage})`}}>
             </div>
-            <div className="front-img-wrapper">
 
+            <div className="content-wrapper">
+                <div className="img-container">
+                    <Icon>{workspace.typeIcon}</Icon>
+                </div>
+                <p>{workspace.title}</p>
             </div>
+
+            <div className="info-wrapper">
+                <div>
+                    <Icon>{workspace.typeIcon}</Icon>
+                    <span>{workspace.type}</span>
+                </div>
+                <span>
+                    .
+                </span>
+                <div>
+                    <Icon>group</Icon>
+                    <span>{workspace.usersCount} users</span>
+                </div>
+            </div>
+            <p className="update">Last update {workspace.update} ago</p>
         </div>
     );
 }

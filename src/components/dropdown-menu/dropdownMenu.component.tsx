@@ -1,19 +1,17 @@
 import { FC, useEffect, useState } from 'react';
-import '../../styles/dropdownMenu.scss'
 import SearchIcon from '@material-ui/icons/Search';
-import HomeIcon from '@material-ui/icons/Home';
-import ApartmentIcon from '@material-ui/icons/Apartment';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import BookIcon from '@material-ui/icons/Book';
 import User from '../../models/user';
 import { getUser } from '../../api/users';
 import Photo from '../../models/photo';
 import { getPhotoById } from '../../api/photos';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Icon from '@material-ui/core/Icon';
+import { Link } from 'react-router-dom';
+import './dropdownMenu.scss'
 interface IDropdownMenuComponentProps {
 
 }
+
 
 
 const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
@@ -37,9 +35,9 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
 
 
     const platform: ElementContainer[] = [
-        new ElementContainer("home", "Home"),
+        new ElementContainer("home", "Home", "/home"),
         new ElementContainer("note", "Publications"),
-        new ElementContainer("apartment", "Entities"),
+        new ElementContainer("apartment", "Entities", "/entities"),
         new ElementContainer("emoji_events", "Administration")
     ];
 
@@ -61,26 +59,31 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
                 <div className="platform">
                     <h3>Platform</h3>
                     {platform
-                        .filter(f => f.name.includes(searchTerm))
-                        .map(({ icon, name }) => {
+                        .filter(f => f.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                        .map(({ icon, name, redirect }) => {
                             return (
+                            <Link to={redirect}>
                                 <div className="element-container">
                                     <Icon>{icon}</Icon>
                                     <span>{name}</span>
                                 </div>
+                            </Link>
                             );
                         })}
                 </div>
+
                 <div className="workspaces">
                     <h3>Workspaces</h3>
                     {workspaces
                         .filter(f => f.name.includes(searchTerm))
-                        .map(({ icon, name }) => {
+                        .map(({ icon, name, redirect }) => {
                             return (
-                                <div className="element-container">
-                                    <Icon>{icon}</Icon>
-                                    <span>{name}</span>
-                                </div>
+                                <Link to={redirect}>
+                                    <div className="element-container">
+                                        <Icon>{icon}</Icon>
+                                        <span>{name}</span>
+                                    </div>
+                                </Link>
                             );
                         })}
                 </div>
@@ -107,10 +110,11 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
 class ElementContainer {
     public icon: string = "";
     public name: string = "";
-
-    constructor(icon: string, name: string) {
+    public redirect: string;
+    constructor(icon: string, name: string, redirect: string | undefined = undefined) {
         this.icon = icon;
         this.name = name;
+        this.redirect = redirect ? redirect : "/404";
     }
 }
 

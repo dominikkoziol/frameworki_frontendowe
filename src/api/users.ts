@@ -9,7 +9,7 @@ export const getUser = (userId: number): Promise<AxiosResponse<User>> => {
 
 
 export const getUserPostsById = (userId: number, limit:number  = 20): Promise<AxiosResponse<Post[]>> => {
-    limit = limit < 1 ?? limit > 20 ? 20 : limit;
+    limit = limit < 1 ? 10 : limit;
     return axios.get(`${apiURL}users/${userId}/posts?_limit=${limit}`)
  }
 

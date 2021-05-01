@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getUser, getUserPostsById } from '../api/users';
-import { getPhotoById } from '../api/photos';
-import User from "../models/user";
-import '../styles/homePage.scss';
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import NoteIcon from '@material-ui/icons/Note';
-import AddIcon from '@material-ui/icons/Add';
-import ApartmentIcon from '@material-ui/icons/Apartment';
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
-import Photo from '../models/photo';
-import Post from '../models/post';
-import ResumeComponent from '../components/resume/resume.component';
+import { getUser, getUserPostsById } from '../../api/users';
+import { getPhotoById } from '../../api/photos';
+import User from "../../models/user";
+import './homePage.scss';
+
+import Photo from '../../models/photo';
+import Post from '../../models/post';
+import ResumeComponent from '../../components/resume/resume.component';
 import SearchIcon from '@material-ui/icons/Search';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
-import Workspace from '../models/workspace';
-import WorkspaceComponent from '../components/workspace/workspace.component';
+import Workspace from '../../models/workspace';
+import WorkspaceComponent from '../../components/workspace/workspace.component';
 
 const Home = () => {
     const userId: number = 3;
@@ -47,58 +42,16 @@ const Home = () => {
     }, [posts.length > 0]);
 
     const workspaces = [
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
-        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150)
+        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
+        new Workspace("https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
+        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25),
+        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
+        new Workspace("https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
+        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25)
     ]
 
     return (
         <div className="Home">
-            <div className="smaller-column column" >
-                <div className="card">
-                    <div className="image-container">
-                        <img src={photo.thumbnailUrl} alt="profile-image" />
-                    </div>
-                    <h2>{user.name}</h2>
-                    <div className="job-title">
-                        <span>Job title - {user.company.name}</span>
-                    </div>
-                    <hr />
-                    <div className="buttons-container">
-                        <div className="container">
-                            <div className="text">
-                                <PeopleOutlineIcon />
-                                <span>Your network</span>
-                            </div>
-                            <button><GroupAddIcon /></button>
-                        </div>
-                        <div className="container">
-                            <div className="text">
-                                <NoteIcon />
-                                <span>Your publications</span>
-                            </div>
-                            <button><AddIcon /></button>
-                        </div>
-                    </div>
-                </div>
-                <div className="option-containers">
-                    <div>
-                        <NoteIcon />
-                        <span>Publications</span>
-                    </div>
-                    <div>
-                        <SystemUpdateAltIcon />
-                        <span>Ecosystem</span>
-                    </div>
-                    <div>
-                        <ApartmentIcon />
-                        <span>Entities</span>
-                    </div>
-                </div>
-            </div>
             <div className="bigger-column column">
                 <div className="big-card">
                     <div className="image-container" style={{ backgroundImage: `url(${photo.url})` }}>
