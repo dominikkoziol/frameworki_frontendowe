@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import Photo from "../models/photo";
 
-const apiURL = "https://jsonplaceholder.typicode.com/";
+const apiURL: string = "https://jsonplaceholder.typicode.com/";
 
 
 

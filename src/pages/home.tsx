@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getUser, getUserPostsById } from '../api/users';
 import { getPhotoById } from '../api/photos';
-import { getPostsWithLimit } from '../api/posts';
 import User from "../models/user";
 import '../styles/homePage.scss';
-import profileImage from '../assets/images/profile_image.png';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import NoteIcon from '@material-ui/icons/Note';
@@ -13,10 +11,13 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import Photo from '../models/photo';
 import Post from '../models/post';
+import ResumeComponent from '../components/resume/resume.component';
+import SearchIcon from '@material-ui/icons/Search';
+import RssFeedIcon from '@material-ui/icons/RssFeed';
 
 
 const Home = () => {
-    const userId: number = 1;
+    const userId: number = 3;
 
     const [user = new User(), setUser] = useState<User>();
     useEffect(() => {
@@ -115,7 +116,7 @@ const Home = () => {
                                         </div>
                                         <div className="info-container">
                                             <h4>{element.title}</h4>
-                                            <div  className="author">
+                                            <div className="author">
                                                 <span> 7 jan. 2020</span>
                                                 <div className="profile-image">
                                                     <img src={photo.thumbnailUrl} alt="profile_picture" />
@@ -129,6 +130,23 @@ const Home = () => {
                             <span className="see-more">See more publications</span>
                         </div>
                     </div>
+                </div>
+                <div className="resume">
+                    <div className="filters">
+                        <h2>Resume your work</h2>
+                        <div className="options">
+                            <div className="input-container">
+                                <input type="text" placeholder="Filter by title..." />
+                                <SearchIcon className="search" />
+                            </div>
+                            <div className="follow">
+                                <RssFeedIcon />
+                                <span> Followed </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ResumeComponent userId={2} />
                 </div>
             </div>
         </div>

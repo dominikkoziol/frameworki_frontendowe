@@ -12,8 +12,17 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import useDropdown from "react-dropdown-hook";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import DropdownMenuComponent from './components/dropdown-menu/dropdownMenu.component';
+
 
 function App() {
+  const [wrapperRef, dropdownOpen, toggleDropdown] = useDropdown();
+
+  const menuHandler = () => toggleDropdown();
+
+
   return (
     <div className="App">
       <Router>
@@ -22,9 +31,13 @@ function App() {
             <div className="image-container">
               <img src={logo} alt="logo" />
             </div>
-            <div className="icon-container">
-              <HomeIcon />
-              <span>Home</span>
+            <div className="menu" ref={wrapperRef}>
+              <div className="icon-container"  onClick={menuHandler}>
+                <HomeIcon />
+                <span>Home</span>
+              </div>
+              <KeyboardArrowDownIcon onClick={menuHandler} />
+              {dropdownOpen && <DropdownMenuComponent />}
             </div>
           </div>
           <div className="input-container">
@@ -36,9 +49,11 @@ function App() {
             <HomeIcon />
             <div>
               <NotificationsIcon />
+              <div className="notifications"><span>3</span></div>
             </div>
             <div>
               <QuestionAnswerIcon />
+              <div className="notifications"><span>2</span></div>
             </div>
           </div>
         </nav>

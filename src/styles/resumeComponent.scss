@@ -1,0 +1,27 @@
+.card {
+    background-color: white;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    margin: 15px 0;
+    width: 100%;
+    h3 {
+        color: rgb(0, 56, 139);
+        margin: 5px 0;
+        font-size: 20px;
+
+    }
+
+    p {
+        margin: 4px 0;
+        color:#575757;
+        font-size: 16px;
+    }
+
+    div {
+        
+        span {
+            font-size: 14px;
+            margin-right: 6px;
+        }
+    }
+}

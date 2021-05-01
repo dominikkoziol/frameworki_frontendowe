@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import Post from "../models/post";
 import User from "../models/user";
-const apiURL = "https://jsonplaceholder.typicode.com/";
+const apiURL: string = "https://jsonplaceholder.typicode.com/";
 
 export const getUser = (userId: number): Promise<AxiosResponse<User>> => {
     return axios.get(`${apiURL}users/${userId}`);
