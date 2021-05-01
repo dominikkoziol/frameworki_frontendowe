@@ -7,8 +7,6 @@ import './homePage.scss';
 import Photo from '../../models/photo';
 import Post from '../../models/post';
 import ResumeComponent from '../../components/resume/resume.component';
-import SearchIcon from '@material-ui/icons/Search';
-import RssFeedIcon from '@material-ui/icons/RssFeed';
 import Workspace from '../../models/workspace';
 import WorkspaceComponent from '../../components/workspace/workspace.component';
 
@@ -104,20 +102,8 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="resume">
-                    <div className="filters">
-                        <h2>Resume your work</h2>
-                        <div className="options">
-                            <div className="input-container">
-                                <input type="text" placeholder="Filter by title..." />
-                                <SearchIcon className="search" />
-                            </div>
-                            <div className="follow">
-                                <RssFeedIcon />
-                                <span> Followed </span>
-                            </div>
+                    <h2>Resume your work</h2>
 
-                        </div>
-                    </div>
                     <ResumeComponent userId={2} />
                 </div>
             </div>
