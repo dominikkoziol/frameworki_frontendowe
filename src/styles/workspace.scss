@@ -1,0 +1,16 @@
+.workspace-component {
+    height: 200px;
+    width: 320px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-right: 20px;
+
+    .background {
+        height: 50%;
+        width: 250px;
+        background-image: url("../assets/images/office.jpg");
+        border-radius: 10px 10px 0 0;
+    }
+}

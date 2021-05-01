@@ -14,7 +14,8 @@ import Post from '../models/post';
 import ResumeComponent from '../components/resume/resume.component';
 import SearchIcon from '@material-ui/icons/Search';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
-
+import Workspace from '../models/workspace';
+import WorkspaceComponent from '../components/workspace/workspace.component';
 
 const Home = () => {
     const userId: number = 3;
@@ -45,6 +46,14 @@ const Home = () => {
         });
     }, [posts.length > 0]);
 
+    const workspaces = [
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150),
+        new Workspace("office.jpg", "aaaa", "Client contract", "Contract", "2 days", 150)
+    ]
 
     return (
         <div className="Home">
@@ -129,6 +138,16 @@ const Home = () => {
                             })}
                             <span className="see-more">See more publications</span>
                         </div>
+                    </div>
+                </div>
+                <div className="workspaces-wrapper">
+                    <h3>Workspaces</h3>
+                    <div className="workspace-container">
+                        {workspaces.map(w => {
+                            return (
+                                <WorkspaceComponent workspace={w} />
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="resume">

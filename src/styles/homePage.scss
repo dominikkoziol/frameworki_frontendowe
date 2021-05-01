@@ -173,6 +173,7 @@
         .publication-container {
             width: 65%;
             background: white;
+            position: relative;
 
             box-sizing: border-box;
             padding: 0 20px;
@@ -184,8 +185,8 @@
                 margin-bottom: 15px;
 
                 .small-image-container {
-                    width: 100px;
-                    height: 100px;
+                    width: 70px;
+                    height: 70px;
 
                     img {
                         width: 100%;
@@ -198,26 +199,32 @@
                     margin-left: 10px;
                     display: flex;
                     flex-direction: column;
+                    justify-content: space-between;
+                    height: 70px;
 
-
-
+                    h4 {
+                        margin: 0;
+                    }
 
                 }
 
             }
 
+        
             .see-more {
                 display: block;
                 color: #6464e6;
                 font-size: 18px;
                 font-weight: bold;
                 margin-bottom: 20px;
-                cursor: pointer
+                cursor: pointer;
+                position: absolute;
+
+                bottom:0;
             }
 
-
         }
-
+      
         .author {
             display: flex;
             align-items: center;
@@ -292,5 +299,23 @@
                 }
             }
         }
+    }
+}
+
+.workspaces-wrapper {
+    height: 400px;
+
+
+    .workspace-container {
+        display: flex;
+        overflow-y: auto;
+        max-width: 100%;
+    }
+
+    .front-img-wrapper {
+        background-color: #fff;
+        box-shadow: 1px 1px 10px 1px rgb(190, 179, 179);
+        height: 30%;
+        width: 100px
     }
 }
