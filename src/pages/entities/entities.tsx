@@ -12,6 +12,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import ShareIcon from '@material-ui/icons/Share';
 import SearchIcon from '@material-ui/icons/Search';
+import RssFeedIcon from '@material-ui/icons/RssFeed';
 const Entities = () => {
 
     const [users = [], setUsers] = useState<User[]>();
@@ -19,25 +20,29 @@ const Entities = () => {
     const [showSettings, setShowSettings] = useState<boolean>(false);
     const [fullScreen, changeFullscreen] = useState<boolean>(false);
     const setLayout = (layout: boolean): void => setLayoutList(layout);
+   const [allUsers = [], setAllUser] = useState<User[]>();
     useEffect(() => {
         getUsersWithPhoto().then(users => {
+            setAllUser(users);
             setUsers(users);
         });
-    }, [users.length]); 
-    
-    const sortItems = () => {
-        console.log("aaa")
-        const sortedItems = [...users].sort((a, b) => (a.name > b.name) ? 1 : -1);
+    }, [allUsers.length]);
+    const onFilterChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const search = event.currentTarget.value;
+        const filteredUsers = [...allUsers].filter(q => q.name.includes(search));
+        setUsers(filteredUsers);
 
-        users.sort();
-        console.log("bbnbb", users)
-        setUsers(sortedItems);
     }
     
-    
+    const sortItems = () => {
+        const sortedItems = [...users].sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setUsers(sortedItems);
+    }
+
+
     // const [isSort, sort] = useState<boolean>();
     // useEffect(() => { return sortItems() }, [isSort]);
-  
+
     return (
         <div className={fullScreen ? "fullscreen entities-page" : "entities-page"}>
             <div className="top-bar">
@@ -63,7 +68,7 @@ const Entities = () => {
                         <div className="container">
                             <MoreHorizIcon />
                         </div>
-                        <div className="container" onClick={() => {sortItems()}}>
+                        <div className="container" onClick={() => { sortItems() }}>
                             <SortByAlphaIcon />
                             <span>Sort</span>
                         </div>
@@ -81,30 +86,35 @@ const Entities = () => {
                     </div>
                     <div className="right-wrapper">
                         <div className="input-wrapper">
-                            <input type="text" placeholder="Filter by title..." />
+                            <input type="text" placeholder="Filter by name..."  onChange={onFilterChange} />
                             <SearchIcon />
                         </div>
-
+                        <div className="items">
+                            <RssFeedIcon />
+                            <span>All items</span>
+                        </div>
                     </div>
                 </div>
             </div>
             {/* "user-data-wrapper" */}
-            <div className={"user-data-wrapper " + (listLayout ? "list-layout" : "mosaic-layout")}>
-                {
-                    users.map((d, i) => {
-                        return (
-                            <div className="user-data" key={i}>
-                                <div className="user-img">
-                                    <img src={d.userPhoto} alt="" />
+            <div className="content">
+                <div className={"user-data-wrapper " + (listLayout ? "list-layout" : "mosaic-layout")}>
+                    {
+                        users.map((d, i) => {
+                            return (
+                                <div className="user-data" key={i}>
+                                    <div className="user-img">
+                                        <img src={d.userPhoto} alt="" />
+                                    </div>
+                                    <div className="data">
+                                        <span className="name">{d.name}</span>
+                                        <span className="address">Cancas 1050, Distrito Capital, Venezuela</span>
+                                    </div>
                                 </div>
-                                <div className="data">
-                                    <span className="name">{d.name}</span>
-                                    <span className="address">Cancas 1050, Distrito Capital, Venezuela</span>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
+                            );
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
