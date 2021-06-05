@@ -1,6 +1,7 @@
 .App {
   background-color: #f5f7f9;
   min-height: 100vh;
+  max-width: 100vw;
 }
 
 @mixin flex-vertical-center {
@@ -127,5 +128,5 @@ nav {
 .main-app-content {
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 98vw;
 }

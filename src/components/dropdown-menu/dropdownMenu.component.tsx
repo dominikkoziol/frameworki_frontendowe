@@ -14,7 +14,7 @@ interface IDropdownMenuComponentProps {
 
 
 
-const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
+const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = () => {
 
     const userId: number = 3;
     const [searchTerm, setSearchTerm] = useState("");
@@ -90,7 +90,7 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = ({ }) => {
             </div>
             <div className="user-wrapper">
                 <div className="image-container">
-                    <img src={photo.thumbnailUrl} />
+                    <img src={photo.thumbnailUrl} alt="thumbnail"/>
                 </div>
                 <div className="user-data">
                     <span className="name">{user.name}</span>

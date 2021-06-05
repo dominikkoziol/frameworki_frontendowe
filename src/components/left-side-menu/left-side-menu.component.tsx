@@ -23,7 +23,7 @@ const LeftSideMenuComponent: FC<ILeftSideMenuProps> = ({ user, photo }) => {
     <div className="smaller-column column" >
       <div className="card">
         <div className="image-container">
-          <img src={photo.thumbnailUrl} alt="profile-image" />
+          <img src={photo.thumbnailUrl} alt="profile" />
         </div>
         <h2>{user.name}</h2>
         <div className="job-title">
@@ -65,7 +65,7 @@ const LeftSideMenuComponent: FC<ILeftSideMenuProps> = ({ user, photo }) => {
           </Link>
         </div>
         <div>
-          <Link to="/404">
+          <Link to="/entities">
             <ApartmentIcon />
             <span>Entities</span>
           </Link>

@@ -7,4 +7,5 @@ export default class User {
     public username: string = "";
     public website: string = "";
     public company: Company = new Company();
+    public userPhoto: string = "";
 }
