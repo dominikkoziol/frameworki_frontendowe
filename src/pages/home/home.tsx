@@ -12,8 +12,8 @@ import WorkspaceComponent from '../../components/workspace/workspace.component';
 
 const Home = () => {
     const userId: number = 3;
-
     const [user = new User(), setUser] = useState<User>();
+    
     useEffect(() => {
         getUser(userId).then(response => { setUser(response.data); });
     }, [user.id]);

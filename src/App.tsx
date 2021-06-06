@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +24,7 @@ import Photo from "./models/photo";
 
 import LeftSideMenuComponent from './components/left-side-menu/left-side-menu.component';
 import Entities from "./pages/entities/entities";
+import Profile from "./pages/profile/profile";
 
 function App() {
   const [wrapperRef, dropdownOpen, toggleDropdown] = useDropdown();
@@ -93,6 +93,9 @@ function App() {
             </Route>
             <Route path="/entities">
               <Entities />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
           </Switch>
         </div>

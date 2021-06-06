@@ -92,10 +92,12 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = () => {
                 <div className="image-container">
                     <img src={photo.thumbnailUrl} alt="thumbnail"/>
                 </div>
+                <Link to="profile">
                 <div className="user-data">
                     <span className="name">{user.name}</span>
                     <span>See profile</span>
                 </div>
+                </Link>
             </div>
 
             <div className="logout-wrapper">

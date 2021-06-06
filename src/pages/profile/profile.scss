@@ -1,0 +1,87 @@
+.Profile {
+    width: 70vw;
+
+    .container {
+        background-color: white;
+        border-radius: 6px;
+        padding: 8px 10px;
+
+        margin-top: 15px;
+        width: 100%;
+
+        .info-row {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+
+            .elements {
+                margin: 5px 10px;
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-left: 5px;
+                }
+
+                span,
+                svg {
+                    color: #405ee4;
+                }
+            }
+        }
+
+        .user-wrapper {
+            display: flex;
+
+            .left-column {
+                width: 150px;
+
+                div {
+                    img {
+                        border-radius: 50%;
+                        width: 100%;
+                    }
+                }
+
+                text-align: center;
+                margin-right: 5px;
+            }
+
+            .right-column {
+                position: relative;
+                width: calc(100% - 150px);
+                display: flex;
+                flex-direction: column;
+
+                input,
+                select {
+                    width: 200px;
+                    margin: 6px;
+                    padding: 5px 15px;
+                    option {
+                        color: black;
+                    }
+                }
+
+                input[disabled],
+                select[disabled] {
+                    background-color: transparent;
+                    border: none;
+                    color: black;
+
+                    appearance: none;
+                  
+                }
+             
+            }
+        }
+
+        .edit {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+
+        }
+    }
+
+}
