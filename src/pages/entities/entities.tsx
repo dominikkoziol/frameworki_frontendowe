@@ -136,7 +136,7 @@ const Entities = () => {
                                             <option value="Ends">Ends before</option>
                                         </select>
                                                                                    
-                                        <input type="text" disabled placeholder={c.field2 != "Ends" ? "Type..." : "Date"} />
+                                        <input type="text" disabled placeholder={c.field2 !== "Ends" ? "Type..." : "Date"} />
                                         <select style={c.field2 === "Contains" ? {display: "none"} : {}}>
                                             <option>In</option>
                                             <option>Not in</option>
