@@ -37,7 +37,7 @@ const Home = () => {
         getUserPostsById(userId, 3).then(response => {
             setPosts(response.data);
         });
-    }, [posts.length > 0]);
+    }, [posts.length]);
 
     const workspaces = [
         new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
@@ -72,7 +72,7 @@ const Home = () => {
                                 return (
                                     <div className="post-container">
                                         <div className="small-image-container">
-                                            <img src={photo.thumbnailUrl} />
+                                            <img src={photo.thumbnailUrl} alt="thumbnail" />
                                         </div>
                                         <div className="info-container">
                                             <h4>{element.title}</h4>

@@ -3,8 +3,8 @@
     transition: 300ms;
 
     .content {
-        max-height: calc(100vh - 200px);
-        overflow-y: auto;
+        height: fit-content;
+
 
         .user-data-wrapper {
             display: flex;
@@ -107,6 +107,14 @@
     display: flex;
     transition: 300ms;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    .filters {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
     .left-wrapper {
         >* {
@@ -194,4 +202,38 @@
     background-color: #f5f7f9;
     box-sizing: border-box;
     padding: 10px;
+}
+
+
+.conditionals-wrapper, .add-condition {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+
+
+
+    & > * {
+        margin: 0 3px;
+    }
+
+    font-size: 16px;
+
+    input, select {
+        padding: 5px 9px;
+        border: none;
+        color: #145fd0;
+    }
+    span {
+        font-size: 18px;
+        color: #145fd0;
+    }
+    svg {
+        color: #145fd0;
+    }
+} 
+
+.add-condition {
+    svg, span {
+        cursor: pointer;
+    }
 }

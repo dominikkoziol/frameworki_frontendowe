@@ -45,18 +45,18 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
         if (currentPage > 2 && currentPage < (lastPage - 1))
             setPages([currentPage - 1, currentPage, currentPage + 1]);
         if (currentPage > 8) setPages([8, 9]);
-    }, [currentPage]);
+    }, [currentPage, lastPage]);
 
     useEffect(() => {
         setFilteredPosts(posts.slice((currentPage - 1) * pageSize, pageSize * currentPage));
-    }, [currentPage]);
+    }, [currentPage, posts]);
 
     useEffect(() => {
         getPostsWithLimit(limit).then((response: AxiosResponse<Post[]>) => {
             setPosts(response.data);
             setFilteredPosts(response.data.slice((currentPage - 1) * pageSize, pageSize * currentPage));
         });
-    }, [posts.length]);
+    }, [posts.length, currentPage]);
 
 
 
@@ -102,13 +102,13 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
                 <span style={currentPage < 3 ? { display: 'none' } : { display: 'inline' }}> ... </span>
                 {pages.map(d => {
                     return (
-                        <button onClick={() => { setCurrentPage(d) }} disabled={currentPage == d} style={currentPage == d ? { color: "gray" } : { color: "#6464e6" }}>
+                        <button onClick={() => { setCurrentPage(d) }} disabled={currentPage === d} style={currentPage === d ? { color: "gray" } : { color: "#6464e6" }}>
                             {d}
                         </button>
                     );
                 })}
                 <span style={currentPage > 8 ? { display: 'none' } : { display: 'inline' }}> ... </span>
-                <button style={currentPage == lastPage ? { color: "gray" } : { color: "#6464e6" }} disabled={currentPage == lastPage} onClick={() => { setCurrentPage(lastPage) }}>{lastPage}</button>
+                <button style={currentPage === lastPage ? { color: "gray" } : { color: "#6464e6" }} disabled={currentPage === lastPage} onClick={() => { setCurrentPage(lastPage) }}>{lastPage}</button>
                 <button disabled={currentPage >= lastPage} style={currentPage < lastPage ? { color: "#6464e6" } : { color: "gray", cursor: "noneu" }} onClick={nextPage}>Next</button>
             </div>
 
