@@ -25,6 +25,7 @@ import Photo from "./models/photo";
 import LeftSideMenuComponent from './components/left-side-menu/left-side-menu.component';
 import Entities from "./pages/entities/entities";
 import Profile from "./pages/profile/profile";
+import Workspace from "./pages/workspace/workspace";
 
 
 function App() {
@@ -98,9 +99,9 @@ function App() {
             <Route path="/profile">
               <Profile />
             </Route>
-            {/* <Route path="/workspace/:id">
+            <Route path="/workspace/:id">
               <Workspace />
-            </Route> */}
+            </Route>
           </Switch>
         </div>
       </Router>

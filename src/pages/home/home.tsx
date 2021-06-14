@@ -9,11 +9,12 @@ import Post from '../../models/post';
 import ResumeComponent from '../../components/resume/resume.component';
 import Workspace from '../../models/workspace';
 import WorkspaceComponent from '../../components/workspace/workspace.component';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const userId: number = 1;
     const [user = new User(), setUser] = useState<User>();
-    
+
     useEffect(() => {
         getUser(userId).then(response => { setUser(response.data); });
     }, [user.id]);
@@ -40,12 +41,12 @@ const Home = () => {
     }, [posts.length]);
 
     const workspaces = [
-        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
-        new Workspace("https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
-        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25),
-        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
-        new Workspace("https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
-        new Workspace("https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25)
+        new Workspace(1,"https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
+        new Workspace(2,"https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
+        new Workspace(3,"https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25),
+        new Workspace(4,"https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Client contract", "Contract", "2 days", 150),
+        new Workspace(5,"https://media.istockphoto.com/photos/woman-sketching-a-business-plan-at-a-creative-office-picture-id912338074?s=612x612", "Supplier contract", "Contract", "2 days", 25),
+        new Workspace(6,"https://media.istockphoto.com/photos/business-people-working-at-a-modern-office-picture-id1150572095?s=612x612", "Corporate", "Corporate", "2 days", 25)
     ]
 
     return (
@@ -70,7 +71,8 @@ const Home = () => {
 
                             {posts.map(element => {
                                 return (
-                                    <div className="post-container">
+
+                                    <div className="post-container" >
                                         <div className="small-image-container">
                                             <img src={photo.thumbnailUrl} alt="thumbnail" />
                                         </div>
@@ -85,6 +87,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                     </div>
+
                                 )
                             })}
                             <span className="see-more">See more publications</span>
@@ -96,7 +99,9 @@ const Home = () => {
                     <div className="workspace-container">
                         {workspaces.map(w => {
                             return (
-                                <WorkspaceComponent workspace={w} />
+                                <Link to={'workspace/' + w.id}>
+                                    <WorkspaceComponent workspace={w} />
+                                </Link>
                             );
                         })}
                     </div>

@@ -37,13 +37,7 @@ const Profile = () => {
     const [expertises, setExpertises] = useState<string[]>(["Manage and acquisition"]);
     const [specialities, setSpecialities] = useState<string[]>(["Cross border operation", "Transactions over 500M€/$"]);
     const [admissions, setAdmissions] = useState<string[]>(["Paris bar association", "Tunisian bar association"]);
-    const [counties, setCounties] = useState<string[]>(["Tunisia"]);
-
-    const addExpertise = (): void => setExpertises(expertises.concat(""));
-    const addSpecialites = (): void => setSpecialities(specialities.concat(""));
-    const addAdmissions = (): void => setAdmissions(admissions.concat(""));
-    const addCounties = (): void => setCounties(counties.concat(""));
-    
+    const [counties, setCounties] = useState<string[]>(["Tunisia"]);    
 
     const enableEditDetails = (): void => {
         if (!userDetailsEnabled) {
@@ -142,7 +136,7 @@ const Profile = () => {
                                     );
                                 })
                             }
-                            {userDetailsEnabled ? <button onClick={() => addExpertise()}><AddIcon /></button> : ""}
+                            {userDetailsEnabled ? <button onClick={() => setExpertises(expertises.concat(""))}><AddIcon /></button> : ""}
                         </div>
                     </div>
                     <div>
@@ -155,7 +149,7 @@ const Profile = () => {
                                     );
                                 })
                             }
-                            {userDetailsEnabled ? <button onClick={() => { addSpecialites() }}><AddIcon /></button> : ""}
+                            {userDetailsEnabled ? <button onClick={() => { setSpecialities(specialities.concat("")) }}><AddIcon /></button> : ""}
                         </div>
                     </div>
 
@@ -170,7 +164,7 @@ const Profile = () => {
                                 })
 
                             }
-                            {userDetailsEnabled ? <button onClick={() => { addAdmissions() }}><AddIcon /></button> : ""}
+                            {userDetailsEnabled ? <button onClick={() => setAdmissions(admissions.concat("")) }><AddIcon /></button> : ""}
                         </div>
                     </div>
 
@@ -184,7 +178,7 @@ const Profile = () => {
                                     );
                                 })
                             }
-                            {userDetailsEnabled ? <button onClick={() => { addCounties() }}><AddIcon /> </button> : ""}
+                            {userDetailsEnabled ? <button onClick={() => setCounties(counties.concat(""))}><AddIcon /> </button> : ""}
                         </div>
                     </div>
 

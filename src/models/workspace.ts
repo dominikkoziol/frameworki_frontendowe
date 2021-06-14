@@ -1,18 +1,8 @@
 /* eslint-disable */
 export default class Workspace {
-    public backgroundImage: string;
-    public title: string;
-    public type: string;
-    public update: string;
-    public usersCount: number;
 
-    constructor(backgroundImage: string,  title: string, type: string, update: string, usersCount: number) {
-        this.backgroundImage = backgroundImage;
-        this.title = title;
-        this.type = type,
-        this.update = update,
-        this.usersCount = usersCount;
-    }
+
+    constructor(public id: number, public backgroundImage: string,  public title: string, public type: string, public update: string, public usersCount: number) { }
 
 
     get typeIcon(): string { 
