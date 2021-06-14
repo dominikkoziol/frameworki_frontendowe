@@ -9,11 +9,13 @@ import User from '../../models/user';
 import './profile.scss';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
-
+import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 const Profile = () => {
     const userId: number = 3;
     const [user, setUser] = useState<User>();
     const [userDataEditorEnabled, setUserDataEditor] = useState<boolean>(false);
+    const [userDetailsEnabled, setDetail] = useState<boolean>(false);
     useEffect(() => {
         getUser(userId).then(usr => {
             setUser(usr.data);
@@ -25,14 +27,53 @@ const Profile = () => {
         getPhotoById(userId).then(response => { setPhoto(response.data) });
     }, [photo.id]);
 
+    const [expertisesClear, setExpertisesClear] = useState<string[]>([]);
+    const [specialitiesClear, setSpecialitiesClear] = useState<string[]>([]);
+    const [admissionsClear, setAdmissionsClear] = useState<string[]>([]);
+    const [countiesClear, setCountiesClear] = useState<string[]>([]);
+    const details = {
+        expertises: useState<string[]>([])
+    };
     const [expertises, setExpertises] = useState<string[]>(["Manage and acquisition"]);
     const [specialities, setSpecialities] = useState<string[]>(["Cross border operation", "Transactions over 500M€/$"]);
     const [admissions, setAdmissions] = useState<string[]>(["Paris bar association", "Tunisian bar association"]);
     const [counties, setCounties] = useState<string[]>(["Tunisia"]);
- 
- 
- 
- 
+
+    const addExpertise = (): void => setExpertises(expertises.concat(""));
+    const addSpecialites = (): void => setSpecialities(specialities.concat(""));
+    const addAdmissions = (): void => setAdmissions(admissions.concat(""));
+    const addCounties = (): void => setCounties(counties.concat(""));
+    
+
+    const enableEditDetails = (): void => {
+        if (!userDetailsEnabled) {
+            setExpertisesClear([...expertises]);
+            setSpecialitiesClear([...specialities]);
+            setAdmissionsClear([...admissions]);
+            setCountiesClear([...counties]);
+        }
+        else {
+            setExpertises(expertisesClear);
+            setSpecialities(specialitiesClear);
+            setAdmissions(admissionsClear);
+            setCounties(countiesClear);
+        }
+        setDetail(!userDetailsEnabled)
+    }
+
+
+    const saveDetails = (): void => {
+      //TODO: PUT ON SAVE
+      
+      setDetail(!userDetailsEnabled);
+    }
+
+    const handleChangeExpertise = (index: number, value: string) => {
+        var clone = [...expertises];
+        clone[index] = value;
+    }
+
+
     return (
         <div className="Profile">
             <div className="container">
@@ -51,9 +92,14 @@ const Profile = () => {
                         </span>
                     </div>
                     <div className="right-column">
-                        <button className="edit" onClick={() => { setUserDataEditor(!userDataEditorEnabled) }}>
-                            {userDataEditorEnabled ? <CloseIcon /> : <EditIcon />}
-                        </button>
+                        <div className="edit-wrapper">
+                            <button className="edit">
+                                {userDataEditorEnabled ? <SaveIcon /> : null}
+                            </button>
+                            <button className="edit" onClick={() => { setUserDataEditor(!userDataEditorEnabled) }}>
+                                {userDataEditorEnabled ? <CloseIcon /> : <EditIcon />}
+                            </button>
+                        </div>
                         <input type="text" disabled={!userDataEditorEnabled} value={user?.name} />
                         <input type="text" disabled={!userDataEditorEnabled} value={user?.username} />
                         <div>
@@ -76,51 +122,70 @@ const Profile = () => {
                 <hr />
 
                 <div className="details">
-                    <div>
-                    <h2>Expertise</h2>
-                    {
-                        expertises.map(e => {
-                            return (
-                                <input type="text" value={e} />
-                            );
-                        })
-                    }
-               
-                    </div>
-                    <div>
-                    <h2>Specialities</h2>
-                    {
-                        specialities.map(e => {
-                            return (
-                                <input type="text" value={e} />
-                            );
-                        })
-                    }
-               
+                    <div className="edit-wrapper">
+                        <button className="edit" onClick={() => { saveDetails() }}>
+                            {userDetailsEnabled ? <SaveIcon /> : null}
+                        </button>
+                        <button className="edit" onClick={() => { enableEditDetails() }}>
+                            {userDetailsEnabled ? <CloseIcon /> : <EditIcon />}
+                        </button>
+
                     </div>
 
                     <div>
-                    <h2>Admissions</h2>
-                    {
-                        admissions.map(e => {
-                            return (
-                                <input type="text" value={e} />
-                            );
-                        })
-                    }
-               
+                        <h2>Expertise</h2>
+                        <div className="details-input-wrapper">
+                            {
+                                expertises.map((e, i) => {
+                                    return (
+                                        <input type="text" value={e}  onChange={(e) => { handleChangeExpertise(i, e.currentTarget.value) }}      key={i} disabled={!userDetailsEnabled} />
+                                    );
+                                })
+                            }
+                            {userDetailsEnabled ? <button onClick={() => addExpertise()}><AddIcon /></button> : ""}
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Specialities</h2>
+                        <div className="details-input-wrapper">
+                            {
+                                specialities.map((e, i) => {
+                                    return (
+                                        <input type="text" value={e} key={i} disabled={!userDetailsEnabled} />
+                                    );
+                                })
+                            }
+                            {userDetailsEnabled ? <button onClick={() => { addSpecialites() }}><AddIcon /></button> : ""}
+                        </div>
                     </div>
 
                     <div>
-                    <h2>Counties</h2>
-                    {
-                        counties.map(e => {
-                            return (
-                                <input type="text" value={e} />
-                            );
-                        })
-                    }
-               
+                        <h2>Admissions</h2>
+                        <div className="details-input-wrapper">
+                            {
+                                admissions.map((e, i) => {
+                                    return (
+                                        <input type="text" value={e} readOnly key={i} disabled={!userDetailsEnabled} />
+                                    );
+                                })
+
+                            }
+                            {userDetailsEnabled ? <button onClick={() => { addAdmissions() }}><AddIcon /></button> : ""}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>Counties</h2>
+                        <div className="details-input-wrapper">
+                            {
+                                counties.map((e, i) => {
+                                    return (
+                                        <input type="text" value={e} readOnly key={i} disabled={!userDetailsEnabled} />
+                                    );
+                                })
+                            }
+                            {userDetailsEnabled ? <button onClick={() => { addCounties() }}><AddIcon /> </button> : ""}
+                        </div>
                     </div>
 
 

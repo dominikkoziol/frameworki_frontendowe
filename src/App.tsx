@@ -4,18 +4,18 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import logo from './assets/images/logo.png';
-import Home from './pages/home/home';
-import './App.scss';
+import { useState, useEffect } from 'react';
+import useDropdown from "react-dropdown-hook";
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import useDropdown from "react-dropdown-hook";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import './App.scss';
+import logo from './assets/images/logo.png';
+import Home from './pages/home/home';
 import DropdownMenuComponent from './components/dropdown-menu/dropdownMenu.component';
 import PageNotFound from "./pages/404/404";
-import { useState, useEffect } from 'react';
 import User from "./models/user";
 
 import { getPhotoById } from "./api/photos";
@@ -26,11 +26,12 @@ import LeftSideMenuComponent from './components/left-side-menu/left-side-menu.co
 import Entities from "./pages/entities/entities";
 import Profile from "./pages/profile/profile";
 
+
 function App() {
   const [wrapperRef, dropdownOpen, toggleDropdown] = useDropdown();
 
   const menuHandler = () => toggleDropdown();
-  const userId: number = 3;
+  const userId: number = 1;
 
   const [user = new User(), setUser] = useState<User>();
   useEffect(() => {
@@ -97,6 +98,9 @@ function App() {
             <Route path="/profile">
               <Profile />
             </Route>
+            {/* <Route path="/workspace/:id">
+              <Workspace />
+            </Route> */}
           </Switch>
         </div>
       </Router>

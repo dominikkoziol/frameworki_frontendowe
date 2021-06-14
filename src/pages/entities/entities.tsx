@@ -102,7 +102,7 @@ const Entities = () => {
                         <div onClick={() => { changeFullscreen(!fullScreen) }} className="container">
                             <FullscreenIcon />
                         </div>
-                        <div className="container">
+                        <div className="container" onClick={() => {navigator.clipboard.writeText("http://localhost:3000/entities")}}>
                             <ShareIcon />
                             <span>Share</span>
                         </div>
