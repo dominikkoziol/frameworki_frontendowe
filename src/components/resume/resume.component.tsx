@@ -5,6 +5,8 @@ import Post from '../../models/post';
 import './resumeComponent.scss';
 import SearchIcon from '@material-ui/icons/Search';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
+import User from '../../models/user';
+import { getUsers } from '../../api/users';
 interface IResumeComponentProps {
     userId: number;
 }
@@ -18,6 +20,8 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
     const [posts = [], setPosts] = useState<Post[]>();
     const [filteredPosts = [], setFilteredPosts] = useState<Post[]>();
     const [pages = [], setPages] = useState<number[]>();
+
+    const [isFollowed, setFollowed] = useState<boolean>(true);
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         const search = event.currentTarget.value;
         setSearchTerm(search);
@@ -27,6 +31,23 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
             setFilteredPosts(posts.slice((currentPage - 1) * pageSize, pageSize * currentPage));
         }
     };
+
+    const changeFollow = () => {
+
+        if(!isFollowed) setFilteredPosts(posts.filter(q => q.userId == userId))
+        else {
+            setPage(1);
+            setFilteredPosts(posts.slice((currentPage - 1) * pageSize, pageSize * currentPage));
+        }
+    };
+
+    const [allUsers, setUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        getUsers().then((users: AxiosResponse<User[]>) => {
+            setUsers(users.data);
+        });
+    }, [allUsers.length])
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
@@ -49,7 +70,7 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
 
     useEffect(() => {
         setFilteredPosts(posts.slice((currentPage - 1) * pageSize, pageSize * currentPage));
-    }, [currentPage, posts]);
+    }, [currentPage, posts, isFollowed]);
 
     useEffect(() => {
         getPostsWithLimit(limit).then((response: AxiosResponse<Post[]>) => {
@@ -70,12 +91,12 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
                     </div>
                     <div className="follow">
                         <RssFeedIcon />
-                        <span> Followed </span>
+                        <button className="follow" onClick={ () => { setFollowed(!isFollowed); changeFollow(); }}> { isFollowed ? "Followed" : "My posts"} </button>
                     </div>
                 </div>
             </div>
             {
-                filteredPosts
+                filteredPosts                        
                     .map((element: Post) => {
                         return (
                             <div className="card">
@@ -84,19 +105,19 @@ const ResumeComponent: FC<IResumeComponentProps> = ({ userId }) => {
                                 <div>
                                     <span>
                                         Subsid. corp.
-                            </span>
+                                    </span>
                                     <span>
                                         Supplier contract
-                            </span>
+                                    </span>
                                     <span>
-                                        Updated 3 days ago by John Doe
-                            </span>
+                                        Updated 3 days ago by {allUsers.find(q => q.id == element.userId)?.name}
+                                    </span>
                                 </div>
                             </div>
                         );
                     })}
 
-            <div className="pagination" style={searchTerm ? { display: "none" } : { display: "block" }}>
+            <div className="pagination" style={searchTerm || !isFollowed ? { display: "none" } : { display: "block" }}>
                 <button disabled={currentPage <= 1} style={currentPage > 1 ? { color: "#6464e6" } : { color: "gray", cursor: "unset" }} onClick={previousPage}>Previous</button>
                 <button onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1} style={currentPage === 1 ? { color: "gray" } : { color: "#6464e6" }}>1</button>
                 <span style={currentPage < 3 ? { display: 'none' } : { display: 'inline' }}> ... </span>

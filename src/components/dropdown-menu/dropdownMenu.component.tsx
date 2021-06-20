@@ -12,8 +12,6 @@ interface IDropdownMenuComponentProps {
 
 }
 
-
-
 const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = () => {
 
     const userId: number = 3;
@@ -60,9 +58,9 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = () => {
                     <h3>Platform</h3>
                     {platform
                         .filter(f => f.name.toLowerCase().includes(searchTerm.toLowerCase()))
-                        .map(({ icon, name, redirect }) => {
+                        .map(({ icon, name, redirect }, i) => {
                             return (
-                            <Link to={redirect}>
+                            <Link to={redirect} key={i}>
                                 <div className="element-container">
                                     <Icon>{icon}</Icon>
                                     <span>{name}</span>
@@ -76,9 +74,9 @@ const DropdownMenuComponent: FC<IDropdownMenuComponentProps> = () => {
                     <h3>Workspaces</h3>
                     {workspaces
                         .filter(f => f.name.includes(searchTerm))
-                        .map(({ icon, name, redirect }) => {
+                        .map(({ icon, name, redirect }, i) => {
                             return (
-                                <Link to={redirect}>
+                                <Link to={redirect} key={i}>
                                     <div className="element-container">
                                         <Icon>{icon}</Icon>
                                         <span>{name}</span>

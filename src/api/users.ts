@@ -26,6 +26,14 @@ export const getUserPostsById = (userId: number, limit:number  = 20): Promise<Ax
     return usersWithPhoto;
 }
 
+export const getUsers = (): Promise<AxiosResponse<User[]>> => {
+    return axios.get<User[]>(`${apiURL}users`);
+}
+
+
+export const updateUserData = (user: User): Promise<AxiosResponse<User>>  => {
+    return axios.put(`${apiURL}users/${user.id}`, user);
+} 
 
 
 

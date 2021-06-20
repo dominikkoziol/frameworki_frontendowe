@@ -12,7 +12,6 @@ import ResumeComponent from '../../components/resume/resume.component';
 import building from '../../assets/images/building.png';
 import share from '../../assets/images/workspace_share.png';
 import calendar from '../../assets/images/calendar.png';
-import { url } from 'node:inspector';
 interface IWorkspaceParams {
     id: string;
 };
@@ -39,8 +38,7 @@ const Workspace = () => {
 
     const [workspace, setWorkspace] = useState<Works>();
     useEffect(() => {
-        console.log(parseInt(id));
-        const work = workspaces.find(q => q.id.toString() == id)
+        const work = workspaces.find(q => q.id.toString() === id)
         setWorkspace(work);
     }, [id]);
     return (

@@ -1,5 +1,6 @@
 .Profile {
     width: 70vw;
+    overflow-x: hidden;
 
     .container {
         background-color: white;
@@ -83,6 +84,7 @@
             position: absolute;
             top: 5px;
             right: 5px;
+
             .edit {
                 background: transparent;
                 border: none;
@@ -96,27 +98,132 @@
 .details {
     position: relative;
 
-    h2 {
-        font-size: 18px;
-        color: #3457f0
+
+
+
+}
+
+
+.subtitle {
+    font-size: 18px;
+    color: #3457f0
+}
+
+
+.input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    input {
+        height: 25px;
+        margin: 2px;
+        border-radius: 6px;
+        border: 1px solid lightgray;
+        color: #526fee;
     }
 
-    .details-input-wrapper {
-        display: flex;
-        flex-wrap: wrap;
+    button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}
 
-        >input {
-            height: 25px;
-            margin: 2px;
+
+.column {
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.correspondants {
+    align-items: flex-start;
+    width: 97%;
+
+    >button {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    >div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        >div {
+            width: 100%;
+
+            button {
+                background-color: rgb(226, 226, 226);
+                width: 80px;
+                margin: 0 8px;
+                border-radius: 6px;
+                height: 30px;
+
+                &:disabled {
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+
+.blue-field {
+    background-color: rgba(117, 140, 243, 0.1);
+    padding: 5px 8px;
+    margin-top: 8px;
+}
+
+
+.table-content {
+    button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    width: 100%;
+
+    .header {
+        font-weight: bolder;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: 6px 0;
+
+        >* {
+            width: 16.5%;
+        }
+
+        input {
             border-radius: 6px;
             border: 1px solid lightgray;
             color: #526fee;
+            box-sizing: border-box;
+
         }
 
-        button {
-            background: transparent;
-            border: none;
-            cursor: pointer;
+        button,
+        .remove {
+            width: 40px;
         }
     }
+
+    .row-fees {
+        >* {
+            width: 20%
+        }
+    }
+
+    >button {
+        display: flex;
+        align-items: center;
+    }
+
+
 }
